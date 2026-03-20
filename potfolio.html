@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lakshay</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy: #1a1a2e;
+      --red: #e94560;
+      --light-bg: #f0f4ff;
+      --card-bg: #ffffff;
+      --text-dark: #1a1a2e;
+      --text-muted: #555;
+      --text-light: #ccc;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #fff;
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ─── NAVBAR ─── */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(26, 26, 46, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 18px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 999;
+      border-bottom: 1px solid rgba(233, 69, 96, 0.15);
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      color: var(--red);
+      font-size: 22px;
+      letter-spacing: 1px;
+    }
+
+    .nav-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      margin-left: 32px;
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.4px;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--red);
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover { color: #fff; }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ─── SECTIONS ─── */
+    section {
+      min-height: 100vh;
+      padding: 120px 60px 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* ─── HOME ─── */
+    #home {
+      background: var(--light-bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #home::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(233,69,96,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    #home::after {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      left: -80px;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(26,26,46,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .home-badge {
+      display: inline-block;
+      background: rgba(233,69,96,0.1);
+      color: var(--red);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(233,69,96,0.25);
+      margin-bottom: 24px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    #home h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(40px, 6vw, 68px);
+      color: var(--navy);
+      line-height: 1.1;
+      margin-bottom: 24px;
+      animation: fadeUp 0.7s ease 0.1s both;
+    }
+
+    #home h1 span { color: var(--red); }
+
+    #home p {
+      font-size: 18px;
+      line-height: 1.85;
+      max-width: 600px;
+      color: var(--text-muted);
+      animation: fadeUp 0.7s ease 0.2s both;
+    }
+
+    .home-cta {
+      display: flex;
+      gap: 16px;
+      margin-top: 36px;
+      animation: fadeUp 0.7s ease 0.3s both;
+    }
+
+    .btn-primary, .btn-outline {
+      padding: 13px 30px;
+      border-radius: 4px;
+      font-size: 15px;
+      font-weight: 500;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--red);
+      color: #fff;
+      border: 2px solid var(--red);
+    }
+
+    .btn-primary:hover {
+      background: transparent;
+      color: var(--red);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--navy);
+      border: 2px solid var(--navy);
+    }
+
+    .btn-outline:hover {
+      background: var(--navy);
+      color: #fff;
+    }
+
+    /* ─── ABOUT ─── */
+    #about {
+      background: var(--navy);
+    }
+
+    #about .section-tag {
+      color: rgba(233,69,96,0.7);
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    #about h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 4vw, 50px);
+      color: var(--red);
+      margin-bottom: 24px;
+    }
+
+    #about p {
+      font-size: 17px;
+      line-height: 1.9;
+      max-width: 680px;
+      color: #aab4c4;
+    }
+
+    .about-stats {
+      display: flex;
+      gap: 48px;
+      margin-top: 48px;
+    }
+
+    .stat {
+      text-align: left;
+    }
+
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 40px;
+      color: var(--red);
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: #6b7e96;
+      margin-top: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    /* ─── SKILLS ─── */
+    #skills {
+      background: #f7f8fc;
+      min-height: auto;
+      padding: 100px 60px;
+    }
+
+    .section-tag {
+      color: rgba(233,69,96,0.7);
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    #skills h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(30px, 4vw, 46px);
+      color: var(--navy);
+      margin-bottom: 48px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 900px;
+    }
+
+    .skill-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 24px 28px;
+      border: 1px solid #e8eaf2;
+      box-shadow: 0 2px 16px rgba(26,26,46,0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(26,26,46,0.1);
+    }
+
+    .skill-name {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--navy);
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .skill-name span { color: var(--red); font-size: 13px; }
+
+    .skill-bar {
+      height: 6px;
+      background: #e8eaf2;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .skill-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--red), #f06080);
+      border-radius: 10px;
+      width: 0;
+      transition: width 1.2s cubic-bezier(.4,0,.2,1);
+    }
+
+    /* ─── REGISTER ─── */
+    #register {
+      background: var(--navy);
+      min-height: auto;
+      padding: 100px 60px;
+    }
+
+    #register .section-tag { color: rgba(233,69,96,0.7); }
+
+    #register h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(30px, 4vw, 46px);
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    #register > p {
+      color: #7a8eaa;
+      font-size: 16px;
+      margin-bottom: 40px;
+    }
+
+    .reg-form {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 40px 44px;
+      max-width: 560px;
+      backdrop-filter: blur(4px);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      font-size: 13px;
+      font-weight: 500;
+      color: #8fa0b8;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      padding: 12px 16px;
+      font-size: 15px;
+      font-family: 'DM Sans', sans-serif;
+      color: #fff;
+      outline: none;
+      transition: border-color 0.3s, background 0.3s;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: #4a5a6e;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--red);
+      background: rgba(233,69,96,0.05);
+    }
+
+    .form-group select option { background: var(--navy); color: #fff; }
+
+    .form-group textarea { resize: vertical; min-height: 100px; }
+
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      background: var(--red);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 500;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      margin-top: 8px;
+      letter-spacing: 0.3px;
+    }
+
+    .btn-submit:hover { background: #c73652; transform: translateY(-1px); }
+    .btn-submit:active { transform: translateY(0); }
+
+    /* ─── SUCCESS OVERLAY ─── */
+    .success-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 10, 25, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .success-overlay.show { display: flex; animation: fadeIn 0.3s ease; }
+
+    .success-box {
+      background: var(--navy);
+      border: 1px solid rgba(233,69,96,0.3);
+      border-radius: 16px;
+      padding: 52px 48px;
+      text-align: center;
+      max-width: 420px;
+      width: 90%;
+      animation: scaleIn 0.4s cubic-bezier(.34,1.56,.64,1);
+    }
+
+    .success-icon {
+      width: 72px;
+      height: 72px;
+      background: rgba(233,69,96,0.12);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      border: 2px solid rgba(233,69,96,0.3);
+    }
+
+    .success-icon svg { width: 32px; height: 32px; }
+
+    .success-box h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .success-box p {
+      color: #7a8eaa;
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .success-box p strong { color: var(--red); }
+
+    .btn-close-success {
+      padding: 12px 36px;
+      background: var(--red);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn-close-success:hover { background: #c73652; }
+
+    /* ─── CONTACT ─── */
+    #contact {
+      background: #f9f9f9;
+      min-height: auto;
+      padding: 100px 60px;
+    }
+
+    #contact h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(30px, 4vw, 46px);
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    #contact > p { color: var(--text-muted); font-size: 16px; margin-bottom: 36px; }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+      max-width: 800px;
+    }
+
+    .contact-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 22px 24px;
+      border: 1px solid #e8eaf2;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 24px rgba(26,26,46,0.08);
+    }
+
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
+      background: rgba(233,69,96,0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .contact-icon svg { width: 20px; height: 20px; stroke: var(--red); }
+
+    .contact-info-label { font-size: 12px; color: #999; margin-bottom: 3px; letter-spacing: 0.5px; }
+    .contact-info-value { font-size: 14px; color: var(--navy); font-weight: 500; word-break: break-word; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--navy);
+      padding: 28px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    footer p { color: #4a5a6e; font-size: 14px; }
+    footer span { color: var(--red); }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 700px) {
+      nav { padding: 16px 24px; }
+      section, #skills, #register, #contact { padding-left: 24px; padding-right: 24px; }
+      .form-row { grid-template-columns: 1fr; }
+      .about-stats { gap: 28px; flex-wrap: wrap; }
+      footer { flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="logo">MyPortfolio</div>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#register">Register</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HOME -->
+  <section id="home">
+    <div class="home-badge">👋 Welcome to my portfolio</div>
+    <h1>Hello, I'm <span>Lakshay</span></h1>
+    <p>
+      I'm a web developer who crafts simple, beautiful, and user-friendly websites.
+      I'm passionate about coding, design, and continuously learning new technologies.
+      Explore this site to learn more about me or get in touch!
+    </p>
+    <div class="home-cta">
+      <a href="#register" class="btn-primary">Get in Touch</a>
+      <a href="#about" class="btn-outline">About Me</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="section-tag">Who I Am</p>
+    <h2>About Me</h2>
+    <p>
+      I'm a B.Tech student with a strong interest in web development.
+      HTML, CSS, and JavaScript are my favourite technologies, and I'm currently
+      exploring freelancing to build real-world experience. My goal is to become
+      a skilled developer who ships meaningful projects and delivers great user experiences.
+    </p>
+    <div class="about-stats">
+      <div class="stat reveal">
+        <div class="stat-number">3+</div>
+        <div class="stat-label">Technologies</div>
+      </div>
+      <div class="stat reveal" style="transition-delay:0.1s">
+        <div class="stat-number">10+</div>
+        <div class="stat-label">Projects Built</div>
+      </div>
+      <div class="stat reveal" style="transition-delay:0.2s">
+        <div class="stat-number">1</div>
+        <div class="stat-label">Year Experience</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <p class="section-tag reveal">What I Know</p>
+    <h2 class="reveal">My Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <div class="skill-name">HTML5 <span>60%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="90"></div></div>
+      </div>
+      <div class="skill-card reveal" style="transition-delay:0.1s">
+        <div class="skill-name">CSS3 <span>500%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
+      </div>
+      <div class="skill-card reveal" style="transition-delay:0.2s">
+        <div class="skill-name">JavaScript <span>30%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="70"></div></div>
+      </div>
+      <div class="skill-card reveal" style="transition-delay:0.3s">
+        <div class="skill-name">Responsive Design <span>85%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
+      </div>
+      <div class="skill-card reveal" style="transition-delay:0.4s">
+        <div class="skill-name">Git & GitHub <span>75%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="65"></div></div>
+      </div>
+      <div class="skill-card reveal" style="transition-delay:0.5s">
+        <div class="skill-name">Figma / UI Design <span>90%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="60"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGISTRATION FORM -->
+  <section id="register">
+    <p class="section-tag">Stay Connected</p>
+    <h2 class="reveal">Register</h2>
+    <p class="reveal">Fill out the form below and I'll get back to you!</p>
+    <form class="reg-form reveal" id="regForm" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name *</label>
+          <input type="text" placeholder="Tony" required />
+        </div>
+        <div class="form-group">
+          <label>Last Name *</label>
+          <input type="text" placeholder="Stark" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email Address *</label>
+        <input type="email" placeholder="stark@email.com" required />
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" placeholder="+91 xxxxx xxxxx" />
+      </div>
+      <div class="form-group">
+        <label>Subject *</label>
+        <select required>
+          <option value="" disabled selected>Select a subject</option>
+          <option>Project Collaboration</option>
+          <option>Freelance Work</option>
+          <option>Job Opportunity</option>
+          <option>General Inquiry</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message *</label>
+        <textarea placeholder="Write your message here..." required></textarea>
+      </div>
+      <button type="submit" class="btn-submit">✉ Send Message</button>
+    </form>
+  </section>
+
+  <!-- SUCCESS OVERLAY -->
+  <div class="success-overlay" id="successOverlay">
+    <div class="success-box">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#e94560" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </div>
+      <h3>Registration Successful!</h3>
+      <p>Thank you for reaching out, <strong id="registrantName">there</strong>!<br/>Your message has been received. I'll get back to you as soon as possible.</p>
+      <button class="btn-close-success" onclick="closeSuccess()">Back to Site</button>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-tag reveal">Find Me</p>
+    <h2 class="reveal">Contact Me</h2>
+    <p class="reveal">Feel free to reach out through any of the channels below.</p>
+    <div class="contact-grid">
+      <div class="contact-card reveal">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </div>
+        <div>
+          <div class="contact-info-label">Email</div>
+          <div class="contact-info-value">tonystark@email.com</div>
+        </div>
+      </div>
+      <div class="contact-card reveal" style="transition-delay:0.1s">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="contact-info-label">Phone</div>
+          <div class="contact-info-value">+91 xxxxx xxxxx</div>
+        </div>
+      </div>
+      <div class="contact-card reveal" style="transition-delay:0.2s">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+        <div>
+          <div class="contact-info-label">Location</div>
+          <div class="contact-info-value">New Delhi, India</div>
+        </div>
+      </div>
+      <div class="contact-card reveal" style="transition-delay:0.3s">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+        </div>
+        <div>
+          <div class="contact-info-label">Instagram</div>
+          <div class="contact-info-value">@lakshaybhaliya2026
+</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 <span>Lakshay</span>. All rights reserved.</p>
+    <p>Built with <span>♥</span> in New Delhi</p>
+  </footer>
+
+  <script>
+    // Smooth scroll
+    document.querySelectorAll("a[href^='#']").forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute("href"));
+        if (target) target.scrollIntoView({ behavior: "smooth" });
+      });
+    });
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          // Animate skill bars
+          const fill = entry.target.querySelector(".skill-fill");
+          if (fill) fill.style.width = fill.dataset.width + "%";
+        }
+      });
+    }, { threshold: 0.15 });
+
+    reveals.forEach(el => observer.observe(el));
+
+    // Registration form
+    function handleSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const firstName = form.querySelector("input[type='text']").value;
+      document.getElementById("registrantName").textContent = firstName || "there";
+      document.getElementById("successOverlay").classList.add("show");
+      form.reset();
+    }
+
+    function closeSuccess() {
+      document.getElementById("successOverlay").classList.remove("show");
+    }
+
+    // Close overlay on outside click
+    document.getElementById("successOverlay").addEventListener("click", function(e) {
+      if (e.target === this) closeSuccess();
+    });
+  </script>
+
+</body>
+</html>
